@@ -8,8 +8,9 @@
     <link rel="stylesheet" href="landing_page.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
         integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Roboto Slab' rel='stylesheet'>
-    <script src="land_page.js"></script>
     <title>Artcore</title>
 </head>
 
@@ -109,13 +110,13 @@
 </nav>
     <section id="bg-image">
         <div id="bg-content">
-            <h2>
+            <h2 class="bg-image-header">
                 I
                 <i class="fas fa-heart"></i>
                 Front End
             </h2>
-            <p>Lorem ipsum dolor sit.</p>
-            <p>Lorem ipsum dolor sit amet.</p>
+            <p class="bg-image-header">Lorem ipsum dolor sit.</p>
+            <p class="bg-image-header">Lorem ipsum dolor sit amet.</p>
 
         </div>
     </section>
@@ -225,7 +226,7 @@
         <h2 class="headers">
             And here are some images for you...
         </h2>
-        <div class="cards_wrapper">
+        <div class="cards_wrapper" id="cards">
             <div class="card">
                 <div class="card-image">
                     <img src="img/card1.png">
@@ -388,6 +389,11 @@
                         nostrum. Esse nisi totam iure dolorem aperiam quod labore quidem!</p>
                 </div>
             </div>
+            
+        </div>
+        <div class="pageNumber">
+            <button id="prevPage">prev</button>
+            <button id="nextPage">next</button>
         </div>
 
     </section>
@@ -410,7 +416,7 @@
                     in your themes backend and add, remove and modify the input fields, text areas,
                     dropdowns and checkboxes from your backend as well.
                 </p>
-                <h4>
+                <h4 class="headers">
                     Send Us Message
                 </h4>
                 <p class="form-field">
@@ -435,9 +441,7 @@
                     <label for="message">
                         Your Message:
                     </label>
-                    <textarea class="message field">
-
-                </textarea>
+                    <textarea class="message field"></textarea>
                 </p>
                 <input class="btn" id="submit-btn" type="submit" value="Send message">
             </form>
@@ -454,7 +458,7 @@
         </p>
     </div>
 
-
+    <script src="land_page.js"></script>
 
 </body>
 

@@ -1,7 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500&display=swap");
 *{
     padding: 0;
     margin: 0;
+    box-sizing: border-box;
 }
+
 
 h1, h2, h3, h4{
     text-transform: uppercase;
@@ -9,9 +12,13 @@ h1, h2, h3, h4{
 
 .headers{
     color: black;
-    margin: 30px;
+    padding: 30px;
     font-size: 20px;
-    font-family: 'Roboto Slab';
+    font: 400 20px "Roboto";
+}
+
+.bg-image-header{
+    font: 400 20px "Roboto";
 }
 
 body{
@@ -275,16 +282,24 @@ nav li{
 
 /*CARDS*/
 .cards_wrapper{
-    display: flex;
+    /* display: flex;
     flex-flow: column wrap;
     max-height: 1600px;
     align-content: space-between;
+    column-width: 400px; */
+    /* display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+     */
+     column-count: 3;
+
 }
 
 .card{
     background-color: white;
     width: 360px;
     margin-bottom: 30px;
+    display: inline-block;
+    box-sizing: border-box;
 }
 
 .card-content{
@@ -353,7 +368,7 @@ nav li{
 
 /*FORM*/
 form > h4{
-    margin-bottom: 40px;
+    padding-bottom: 40px;
 }
 
 .form-wrapper{
@@ -420,6 +435,10 @@ form label{
     .service-content {
       width: 300px;
     }
+
+    .cards_wrapper{
+       column-count: 2;
+    }
     .card {
       width: 290px;
     }
@@ -451,11 +470,6 @@ form label{
     .service-content {
         width: 550px;
     }
-
-    .cards_wrapper{
-        max-height: 2500px;
-    }
-
     .card {
         width: 350px;
     }
@@ -479,6 +493,8 @@ form label{
 
 
   @media screen and (max-width: 768px) {
+
+
     header {
       flex-direction: column;
       padding-top: 30px;
@@ -520,10 +536,9 @@ form label{
         padding: 0 20px;
     }
 
-    .cards_wrapper{
-        max-height: 100%;
+       .cards_wrapper{
+        column-count: 1;
     }
-
     .card{
         width: 100%;
     }
@@ -575,4 +590,24 @@ form label{
 
   #close:hover{
       cursor: pointer;
+  }
+
+  .pageNumber{
+      margin-top: 50px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+  }
+
+
+  .pageNumber button{
+    font-size: 16px;
+    padding: 15px;
+  }
+
+
+  .break-column{
+    flex-basis: 100%;
+    width: 0;
   }
