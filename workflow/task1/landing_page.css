@@ -291,8 +291,7 @@ nav li{
     grid-template-columns: 1fr 1fr 1fr;
      */
      column-count: 3;
-
-}
+text-align: center;    }
 
 .card{
     background-color: white;
