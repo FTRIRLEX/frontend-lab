@@ -1,78 +1,22 @@
 (function () {
     class CustomMoment {
         constructor(date) {
-            if (typeof date == "number") {
-                this.date = new Date(date)
-            }
-            else this.date = date
+
+            this.date = (typeof date === "number") ? new Date(date) : date
         }
 
         static parse(dateToParse, formatToParse) {
-            let result;
-            let days = ""
-            let months = ""
-            let years = ""
-            let newArray = []
-            let splitArrayDate = ""
-            switch (formatToParse) {
-                case "DD-MM-YYYY":
-                    [days, months, years] = dateToParse.split("-")
-                    newArray = [years, months, days]
-                    // console.log(Date.parse(arr.join('-')))
-                    result = Date.parse(newArray.join('-'))
-                    break;
-
-                case "MM-DD-YYYY":
-                    [months, days, years] = dateToParse.split("-")
-                    newArray = [years, months, days]
-                    // console.log(Date.parse(arr.join('-')))
-                    result = Date.parse(newArray.join('-'))
-                    break;
-                case "YYYY-MM-DD":
-                    [years, months, days] = dateToParse.split("-")
-                    newArray = [years, months, days]
-                    // console.log(Date.parse(arr.join('-')))
-                    result = Date.parse(newArray.join('-'))
-                    break;
-
-                case "MMDDYYYY":
-                    splitArrayDate = dateToParse.split('');
-                    years = splitArrayDate.slice(4, 8).join('');
-                    months = splitArrayDate.slice(0, 2).join('');
-                    days = splitArrayDate.slice(2, 4).join('');
-                    newArray.push(years);
-                    newArray.push(months);
-                    newArray.push(days);
-                    result = Date.parse(newArray.join('-'))
-                    break;
-                case "DDMMYYYY":
-                    splitArrayDate = dateToParse.split('');
-                    years = splitArrayDate.slice(4, 8).join('');
-                    days = splitArrayDate.slice(0, 2).join('');
-                    months = splitArrayDate.slice(2, 4).join('');
-                    newArray.push(years);
-                    newArray.push(months);
-                    newArray.push(days);
-                    result = Date.parse(newArray.join('-'))
-                    break;
-                case "YYYYMMDD":
-                    splitArrayDate = dateToParse.split('');
-                    days = splitArrayDate.slice(6, 8).join('');
-                    console.log(days)
-                    years = splitArrayDate.slice(0, 4).join('');
-                    console.log(years)
-                    months = splitArrayDate.slice(4, 6).join('');
-                    console.log(months)
-                    newArray.push(years);
-                    newArray.push(months);
-                    newArray.push(days);
-                    result = Date.parse(newArray.join('-'))
-                    break;
-                default:
-                    console.log(`Wrong!`);
-                    return null;
+            let years = formatToParse.search('YYYY')
+            let months = formatToParse.search('MM')
+            let days = formatToParse.search('DD')
+            years = parseInt(dateToParse.slice(years, years + 4))
+            months = parseInt(dateToParse.slice(months, months + 2))
+            days = parseInt(dateToParse.slice(days, days + 2))
+            let newDate = new Date(years, months - 1, days)
+            if(newDate != 'Invalid Date'){
+                return new CustomMoment(newDate);
             }
-            return new CustomMoment(result);
+            else return 'ERROR. Invalid Format'
 
         }
 
@@ -88,32 +32,13 @@
                 months = '0' + months
             }
             let years = formatedDate.getFullYear()
-            console.log(days, months, years)
-
-            switch (sample) {
-                case "DD-MM-YYYY":
-                    result = `${days}-${months}-${years}`
-                    break;
-                case "MM-DD-YYYY":
-                    result = `${months}-${days}-${years}`
-                    break;
-                case "YYYY-MM-DD":
-                    result = `${years}-${months}-${days}`
-                    break;
-                case "DD/MM/YYYY":
-                    result = `${days}/${months}/${years}`
-                    break;
-                case "MM/DD/YYYY":
-                    result = `${months}/${days}/${years}`
-                    break;
-                case "YYYY/MM/DD":
-                    result = `${years}/${months}/${days}`
-                    break;
-                default:
-                    console.log(`Wrong!`);
-                    return null;
+            result = sample.replace('YYYY', years)
+            result = result.replace('DD', days)
+            result = result.replace('MM', months)
+            if(!isNaN(parseInt(result))) {
+                return result
             }
-            return result;
+            else return 'ERROR. Invalid Format'
         }
 
         fromNow() {
