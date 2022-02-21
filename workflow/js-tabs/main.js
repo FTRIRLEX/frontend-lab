@@ -29,23 +29,31 @@ const btnContainer = document.getElementById("btns-container")
 const content = document.getElementById("content")
 
 
-const selectTab = (index) => {
+const selectTab = (e) => {
+
     let selTabs = document.getElementsByClassName('btn-active')
     let arr = Array.from(selTabs);
     console.log(arr)
     arr.forEach(el => {
         el.classList.remove("btn-active");
     })
-    document.getElementById(`${index}`).classList.add("btn-active")
-    content.innerHTML = tabs[index-1].content
-    
+    e.target.classList.add("btn-active")
+    content.innerHTML = tabs[e.target.id - 1].content
+
 }
 
 tabs.forEach(tab => {
-    const btn = ` <li class="btn btn-active" onclick="selectTab(${tab.id})" id="${tab.id}">${tab.title}</li>`
-    btnContainer.innerHTML += btn
+    if (tab.id === 1) {
+        const btn = ` <li class="btn btn-active" id="${tab.id}">${tab.title}</li>`
+        btnContainer.innerHTML += btn
+        content.innerHTML = tab.content
+    }
+    else {
+        const btn = ` <li class="btn" id="${tab.id}">${tab.title}</li>`
+        btnContainer.innerHTML += btn
+    }
 })
 
 window.onload = () => {
-    selectTab(1)
+    document.getElementById('btns-container').addEventListener('click', selectTab)
 }
