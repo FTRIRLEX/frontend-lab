@@ -1,92 +1,234 @@
+let startedDivId = 0
 const url = 'https://api.thecatapi.com/v1/images/search'
-const imagesWrapper = document.querySelector('.wrapper')
-let startedID = 0
-const handleErr = error => alert(error)
-const createId = () => startedID += 1
+const wrapper = document.querySelector('.wrapper')
+const nextId = () => startedDivId += 1
 
-const urls = Array(5).fill(url)
+const loadImg = (url) => {
+    const id = nextId()
+    createLoader(id)
+    return fetch(url)
+        .then(response => response.json())
+        .then(response => createImg(response[0].url, id))
 
-const createAndAppendloaderDiv = id => {
-    const imageWrapper = document.createElement('div');
-    imageWrapper.className = 'image-wrapper';
-    imageWrapper.id = `image-${id}`;
-    imagesWrapper.append(imageWrapper);
+}
 
-    const loaderWrapper = document.createElement('div');
-    imageWrapper.append(loaderWrapper);
-    loaderWrapper.className = 'loader-wrapper';
-    loaderWrapper.id = `loader-${id}`;
+const loadImgCallback = (url, callback) => {
+    const id = nextId()
+    createLoader(id)
+    return fetch(url)
+        .then(response => response.json())
+        .then(response => createImg(response[0].url, id))
+        .then(callback)
 
-    const loader = document.createElement('div');
-    loader.className = 'loader';
-    loaderWrapper.append(loader);
-};
+}
 
+const loadImageAsync = async (url) => {
+    const id = nextId()
+    createLoader(id)
+    const response = await fetch(url)
+    const responsejson = await response.json()
+    createImg(responsejson[0].url, id)
+}
 
-const createAndAppendImage = (src, id) => {
+const createImg = (url, id) => {
+    //createLoader(id)
     let img = document.createElement('img')
+    img.src = url;
+    console.log(img)
+    //img.classList.add('image-wrapper')
     img.onload = () => {
-        document.querySelector(`#loader-${id}`).remove()
-        document.querySelector(`#image-${id}`).append(img)
+        document.getElementById(`loader-${id}`).remove()
+        document.getElementById(`wrapper-${id}`).append(img)
     }
-    img.src = src
 }
 
-const loadOneByOneAsync = async () => {
-    const loadAndInnerImage = async () => {
-        try {
-            let id = createId(startedID);
-            createAndAppendloaderDiv(id);
-            const response = await fetch(url);
-            content = await response.json();
-            createAndAppendImage(content[0].url, id);
-        } catch (err) {
-            handleErrors(err);
+const createLoader = (id) => {
+    let imgWrapper = document.createElement('div')
+    imgWrapper.classList.add('image-wrapper')
+    imgWrapper.id = `wrapper-${id}`
+    wrapper.append(imgWrapper)
+    let loader = document.createElement('div')
+    loader.classList.add('loader')
+    loader.id = `loader-${id}`
+    imgWrapper.append(loader)
+}
+
+
+const task1Promise = () => {
+    loadImg(url)
+        .then(() => loadImg(url))
+        .then(() => loadImg(url))
+        .then(() => loadImg(url))
+        .then(() => loadImg(url))
+
+}
+
+const task1Callback = () => {
+    loadImgCallback(url, () =>
+        loadImgCallback(url, () =>
+            loadImgCallback(url, () =>
+                loadImgCallback(url, () =>
+                    loadImgCallback(url)))))
+}
+
+
+const task1Async = async () => {
+    const arrAsync = Array(5).fill(loadImageAsync)
+    for (let i = 0; i < 5; i++) {
+        await arrAsync[i](url)
+    }
+}
+
+
+const task1Generator = () => {
+    function* task1Generator() {
+        for (let i = 0; i < 5; i++) {
+            yield loadImageAsync(url)
         }
-    };
-
-    for (let i = 0; i < urls.length; i++) {
-        await loadAndInnerImage(urls[i]);
-    }
-};
-
-
-const loadOneByOnePromise = () => {
-    const load = url => {
-        createAndAppendloaderDiv(createId(startedID))
-        return fetch(url)
-            .then(response => response.json())
-            .then(response => createAndAppendImage(response[0].url, startedID))
-
     }
 
-    load(url)
-        .then(() => load(url))
-        .then(() => load(url))
-        .then(() => load(url))
-        .then(() => load(url))
-        .catch(handleErr)
+    let generator = task1Generator()
+
+    function execute(generator, yieldValue) {
+        let next = generator.next(yieldValue);
+        if (!next.done) {
+            return next.value
+                .then(result => execute(generator, result));
+        }
+    }
+    execute(generator)
+}
+
+const task2Promise = () => {
+    const promiseArray = []
+    Array(5).fill(url).forEach(el => {
+        promiseArray.push(fetch(el).then(response => response.json()))
+        createLoader(nextId())
+    })
+    Promise.all(promiseArray).then(resoonses => resoonses.forEach((json, id) => createImg(json[0].url, id + 1)))
 }
 
 
-const loadOneByOneCallback = () => {
-    const load = (callback) => {
-        createAndAppendloaderDiv(createId(startedID))
-        return fetch(url)
-            .then(response => response.json())
-            .then(response => createAndAppendImage(response[0].url, startedID))
-            .then(() => callback())
 
-    }
-
-    load(
-        () => load(
-            () => load(
-                () => load(
-                    () => load()))))
+const task2Async = async () => {
+    const promiseArray = []
+    Array(5).fill(url).forEach(el => {
+        promiseArray.push(fetch(el).then(response => response.json()))
+        createLoader(nextId())
+    })
+    console.log(promiseArray)
+    const result = await Promise.all(promiseArray)
+    console.log(result)
+    result.forEach((el, id) => {
+        console.log(id)
+        createImg(el[0].url, id + 1)
+    })
+    Promise.all(promiseArray).then(response => console.log(response))
 }
+
+
+const task2Generator = () => {
+    const promiseArray = []
+    function* task2Generator() {
+        for (let i = 0; i < 5; i++) {
+            yield promiseArray.push(fetch(url).then(response => response.json()))
+        }
+    }
+    const generator = task2Generator()
+    function execute(generator, yieldValue) {
+        let next = generator.next(yieldValue);
+        console.log(next)
+        if (!next.done) {
+            return execute(generator, next.value)
+        }
+    }
+    execute(generator)
+    console.log(promiseArray)
+    Array(5).fill(url).forEach(el => createLoader(nextId()))
+    Promise.all(promiseArray).then(response => response.forEach((el, id) => createImg(el[0].url, id + 1)))
+
+}
+
+const task2Calback = () => {
+    const promiseArray = []
+    const generateArray = (url,callback) => {
+        createLoader(nextId())
+        promiseArray.push(fetch(url).then(response => response.json()))
+        console.log(promiseArray)
+        typeof callback === 'function' ?  callback() : console.log('end')
+       
+    }
+    generateArray(url, generateArray(url, () => generateArray(url, () => generateArray(url, () => generateArray(url)))))
+
+    Promise.all(promiseArray).then(response => response.forEach((el, id) => createImg(el[0].url, id + 1)))
+} 
+
+const task3Promise = () => {
+    const promiseArray = []
+    const id = nextId()
+    Array(5).fill(url).forEach(el => promiseArray.push(fetch(el)))
+    createLoader(id)
+    Promise.race(promiseArray).then(response => response.json()).then(response => createImg(response[0].url, id))
+}
+
+
+const task3Async = async () => {
+    const promiseArray = []
+    const id = nextId()
+    Array(5).fill(url).forEach(el => promiseArray.push(fetch(el)))
+    createLoader(id)
+    const result = await Promise.race(promiseArray).then(response => response.json())
+    createImg(result[0].url, id)
+}
+
+
+const task3Generator = () => {
+    const promiseArray = []
+    function* task3Generator() {
+        for (let i = 0; i < 5; i++) {
+            yield promiseArray.push(fetch(url))
+        }
+    }
+    const generator = task3Generator()
+    function execute(generator, yieldValue) {
+        let next = generator.next(yieldValue);
+        console.log(next)
+        if (!next.done) {
+            return execute(generator, next.value)
+        }
+    }
+    execute(generator)
+    const id = nextId()
+    createLoader(id)
+    Promise.race(promiseArray).then(response => response.json().then(response => createImg(response[0].url, id)))    
+}
+
+
+const task3Callback = () => {
+    const promiseArray = []
+    const id = nextId()
+    createLoader(id)
+    const generateArray = (url,callback) => {
+        promiseArray.push(fetch(url))
+        console.log(promiseArray)
+        typeof callback === 'function' ?  callback() : console.log('end')
+    }
+    generateArray(url, generateArray(url, () => generateArray(url, () => generateArray(url, () => generateArray(url)))))
+    Promise.race(promiseArray).then(response => response.json().then(response => createImg(response[0].url, id)))
+
+}
+
 window.onload = () => {
-    //loadOneByOneAsync()
-    //loadOneByOnePromise()
-    //loadOneByOneCallback()
+    task1Promise()
+    //task1Callback()
+    //task1Async()
+    //task1Generator()
+    //task2Promise()
+    //task2Async()
+    //task2Generator()
+    //task2Calback()
+    //task3Promise()
+    //task3Async()
+    //task3Generator()
+    //task3Callback()
 }
