@@ -1,0 +1,96 @@
+.wrapper{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+.input-box, .output-box{
+    width: 40%;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+#text-area, #output-content{
+    width: 100%;
+    border: 2px solid orange;
+    height: 700px;
+    font-size: 20px;
+}
+#output-content{
+    min-height: 700px;
+    height: auto;
+}
+
+.btns-box{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+}
+
+.btns-box button{
+    width: 150px;
+    height: 40px;
+    text-align: center;
+    color: white;
+    background-color: orange;
+    border: none;
+    font-size: 20px;
+    border-radius: 10px;
+}
+
+.btns-box button:hover{
+    background-color: orangered;
+    cursor: pointer;
+}
+
+#clear{
+    margin-top: 30px;
+}
+
+.green{
+    color: green;
+}
+
+.orange{
+    color: orange;
+}
+
+.red{
+    color: red;
+}
+
+.black{
+    color: black;
+}
+
+.blue{
+    color: blue;
+}
+
+li{
+    list-style-type: none;
+    margin: 10px 0;
+}
+
+.clickable::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: -20px;
+    border: 5px solid transparent;
+    border-top: 10px solid rgb(11, 133, 11);
+    z-index: 1;
+    cursor: pointer;
+}
+
+.clickable {
+    position: relative;
+    cursor: pointer;
+}
+
+.clickable-rotate::before {
+    top: 4px;
+    transform: rotate(-90deg);
+}

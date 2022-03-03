@@ -1,0 +1,28 @@
+{
+  "name": "json-visualizer-webpack",
+  "version": "1.0.0",
+  "description": "add webpack to json",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FTRIRLEX/frontend-lab.git"
+  },
+  "keywords": [
+    "json",
+    "json-visualizer",
+    "webpack"
+  ],
+  "author": "Yahor Maroz <egorchik002@mail.ru>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FTRIRLEX/frontend-lab/issues"
+  },
+  "homepage": "https://github.com/FTRIRLEX/frontend-lab#readme",
+  "devDependencies": {
+    "html-webpack-plugin": "^5.5.0",
+    "webpack": "^5.69.1"
+  }
+}
