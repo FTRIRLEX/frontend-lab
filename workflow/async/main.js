@@ -1,6 +1,7 @@
 let startedDivId = 0
 const url = 'https://api.thecatapi.com/v1/images/search'
 const wrapper = document.querySelector('.wrapper')
+
 const nextId = () => startedDivId += 1
 
 const loadImg = (url) => {
@@ -34,7 +35,6 @@ const createImg = (url, id) => {
     //createLoader(id)
     let img = document.createElement('img')
     img.src = url;
-    console.log(img)
     //img.classList.add('image-wrapper')
     img.onload = () => {
         document.getElementById(`loader-${id}`).remove()
@@ -116,14 +116,10 @@ const task2Async = async () => {
         promiseArray.push(fetch(el).then(response => response.json()))
         createLoader(nextId())
     })
-    console.log(promiseArray)
     const result = await Promise.all(promiseArray)
-    console.log(result)
     result.forEach((el, id) => {
-        console.log(id)
         createImg(el[0].url, id + 1)
     })
-    Promise.all(promiseArray).then(response => console.log(response))
 }
 
 
@@ -137,13 +133,11 @@ const task2Generator = () => {
     const generator = task2Generator()
     function execute(generator, yieldValue) {
         let next = generator.next(yieldValue);
-        console.log(next)
         if (!next.done) {
             return execute(generator, next.value)
         }
     }
     execute(generator)
-    console.log(promiseArray)
     Array(5).fill(url).forEach(el => createLoader(nextId()))
     Promise.all(promiseArray).then(response => response.forEach((el, id) => createImg(el[0].url, id + 1)))
 
@@ -154,7 +148,6 @@ const task2Calback = () => {
     const generateArray = (url,callback) => {
         createLoader(nextId())
         promiseArray.push(fetch(url).then(response => response.json()))
-        console.log(promiseArray)
         typeof callback === 'function' ?  callback() : console.log('end')
        
     }
@@ -192,7 +185,6 @@ const task3Generator = () => {
     const generator = task3Generator()
     function execute(generator, yieldValue) {
         let next = generator.next(yieldValue);
-        console.log(next)
         if (!next.done) {
             return execute(generator, next.value)
         }
@@ -210,7 +202,6 @@ const task3Callback = () => {
     createLoader(id)
     const generateArray = (url,callback) => {
         promiseArray.push(fetch(url))
-        console.log(promiseArray)
         typeof callback === 'function' ?  callback() : console.log('end')
     }
     generateArray(url, generateArray(url, () => generateArray(url, () => generateArray(url, () => generateArray(url)))))
@@ -223,10 +214,14 @@ window.onload = () => {
     //task1Callback()
     //task1Async()
     //task1Generator()
+
+
     //task2Promise()
     //task2Async()
     //task2Generator()
     //task2Calback()
+
+
     //task3Promise()
     //task3Async()
     //task3Generator()
