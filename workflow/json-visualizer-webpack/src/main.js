@@ -1,3 +1,5 @@
+import _ from 'lodash'
+
 const btnBuild = document.getElementById('build')
 const btnClear = document.getElementById('clear')
 const textArea = document.getElementById('text-area')
@@ -18,7 +20,7 @@ const clear = () => {
 const inputToJSON = (input) => {
     let inputJSON = {}
     try {
-        inputJSON = typeof input === 'string' ? JSON.parse(input) : input
+        inputJSON = _.isString(input) ? JSON.parse(input) : input
     }
     catch (err) {
         console.log(err)
@@ -29,7 +31,7 @@ const inputToJSON = (input) => {
 
 const colorByType = (value) => {
     const type = typeof value
-    const key = value === null ? value : type
+    const key = _.isNull(value) ? value : type
     const styleObj = {
         number: 'green',
         boolean: 'orange',
@@ -45,7 +47,7 @@ const jsonToHrml = (data) => {
     const htmlArr = [`<ul style="display: block">`]
     for (let [key, value] of Object.entries(json)) {
         if (typeof value === 'object' && value !== null) {
-            const objLength = Array.isArray(value)
+            const objLength = _.isArray(value)
                 ? `[${value.length}]`
                 : `{${Object.keys(value).length}}`
             htmlArr.push(`<li class="clickable">${key} ${objLength}:`);
