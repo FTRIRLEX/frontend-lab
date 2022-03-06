@@ -5,11 +5,14 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const CompressionPlugin = require("compression-webpack-plugin");
 const WebpackObfuscator = require('webpack-obfuscator');
-
+const BrotliPlugin  = require ('brotli-webpack-plugin') ; 
+const TerserPlugin = require('terser-webpack-plugin');
 
 
 
 const webpackMode = process.env.NODE_ENV
+
+
 const setPlugins = () => {
     const plugins = [
         new HTMLWebpackPlugin({
@@ -22,11 +25,12 @@ const setPlugins = () => {
 
     if (webpackMode === 'production') {
         plugins.push(
-            new CompressionPlugin({
-                filename: '[name][cententhash].gz',
-                algorithm: 'gzip',
-                test: /\.js$|\.css$|\.html$/
-            }),
+            new BrotliPlugin({
+                asset: '[path].br[query]',
+                test: /\.(js|css|html|svg)$/,
+                threshold: 10240,
+                minRatio: 0.8
+            })
         )
     }
 
@@ -87,11 +91,21 @@ module.exports = {
     optimization: {
         splitChunks: {
             chunks: 'all'
-        }
+        },
+        minimizer: [
+            new TerserPlugin({
+                parallel: true
+            })
+        ]
     },
     plugins: setPlugins(),
     module: {
         rules: setRules()
+    },
+    devServer:{
+        open: true,
+        hot: webpackMode === 'development',
+        port: 8080
     }
 }
 
