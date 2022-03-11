@@ -1,8 +1,8 @@
 import React from 'react'
-import classes from './MyButton.module.css'
+import classes from './AuthButton.module.css'
 
 
-const MyButton = ({openModal}) => {
+const AuthButton = ({openModal}) => {
   return (
     <button className= {classes.MyButton} onClick={openModal}>
       Get Started
@@ -10,4 +10,4 @@ const MyButton = ({openModal}) => {
   )
 }
 
-export default MyButton
+export default AuthButton
