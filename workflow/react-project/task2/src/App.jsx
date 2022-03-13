@@ -1,13 +1,15 @@
+import React from 'react';
 import './App.css';
 import BodyContent from './components/Body/BodyContent';
-import BodyHeader from './components/Header/BodyHeader'
+import BodyHeader from './components/Header/BodyHeader';
+
 function App() {
-  
   return (
     <div className="App">
-    <BodyHeader/>
-    <BodyContent/>
+      <BodyHeader />
+      <BodyContent />
     </div>
   );
 }
+
 export default App;

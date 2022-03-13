@@ -1,14 +1,14 @@
-import React from 'react'
-import Content from './Content/Content'
-import MainTitle from './MainTitile/MainTitle'
+import React from 'react';
+import Content from './Content/Content';
+import MainTitle from './MainTitile/MainTitle';
 
-const BodyContent = () => {
+function BodyContent() {
   return (
-        <div>
-            <MainTitle/>
-            <Content/>
-        </div>
-    )
+    <div>
+      <MainTitle />
+      <Content />
+    </div>
+  );
 }
 
-export default BodyContent
+export default BodyContent;
