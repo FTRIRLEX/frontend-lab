@@ -5,7 +5,7 @@ import ModalWindow from '../../ModalWindow/ModalWindow';
 
 import classes from './Content.module.css';
 
-function Content() {
+const Content = () => {
   const [isModalOpen, setModalOpen] = useState(false);
 
   const toggleModal = useCallback(() => {
@@ -25,6 +25,6 @@ function Content() {
       />
     </>
   );
-}
+};
 
 export default Content;

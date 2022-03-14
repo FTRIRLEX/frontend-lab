@@ -4,7 +4,7 @@ import AuthButton from './Button/AuthButton';
 import Logo from './Logo/Logo';
 import classes from './BodyHeader.module.css';
 
-function BodyHeader() {
+const BodyHeader = () => {
   const [isModalOpen, setModalOpen] = useState(false);
 
   const toggleModal = useCallback(() => {
@@ -23,6 +23,6 @@ function BodyHeader() {
       />
     </>
   );
-}
+};
 
 export default BodyHeader;
