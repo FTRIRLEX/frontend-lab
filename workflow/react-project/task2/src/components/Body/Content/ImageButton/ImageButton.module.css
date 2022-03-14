@@ -1,0 +1,80 @@
+.imgButton {
+    position: relative;
+    width: 573px;
+    height: 598px;
+    background: url(../../../../img/coctail1.png) center/cover no-repeat;
+    cursor: pointer;
+}
+
+.text {
+    position: absolute;
+    width: 182.67px;
+    height: 36.66px;
+    bottom: 30px;
+    right: 100px;
+    width: 182px;
+    font-family: Asap;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 18px;
+    text-align: center;
+
+    color: #555555;
+
+    transform: rotate(-15.81deg);
+}
+
+
+@media screen and (max-width: 1200px) {
+    .imgButton {
+        width: 373px;
+        height: 398px;
+    }
+
+    .text {
+        bottom: 5px;
+        right: 50px;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .imgButton {
+        width: 273px;
+        height: 298px;
+    }
+
+    .text {
+        bottom: -5px;
+        right: 10px;
+        width: 180px;
+        font-size: 0.9rem;
+        line-height: 1rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .imgButton {
+        width: 173px;
+        height: 198px;
+    }
+
+    .text {
+        bottom: -20px;
+        right: -20px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .imgButton {
+        margin-bottom: 140px;
+    }
+
+    .text {
+        bottom: -20px;
+        right: -20px;
+        width: 150px;
+        font-size: 0.9rem;
+        line-height: 1rem;
+    }
+}

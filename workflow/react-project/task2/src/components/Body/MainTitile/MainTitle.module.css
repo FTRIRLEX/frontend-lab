@@ -1,0 +1,23 @@
+.MainTitle{
+    font-family: 'Rochester';
+    font-style: normal;
+    font-size: 6.5rem;
+    font-weight: 400;
+    text-align: center;
+    margin-top: 20px;
+    color: #4CAF50;
+}
+
+
+@media screen and (max-width: 768px) {
+    .MainTitle{
+        font-size: 5rem;
+    }
+  }
+
+
+  @media screen and (max-width: 500px) {
+    .MainTitle{
+        font-size: 3rem;
+    }
+  }

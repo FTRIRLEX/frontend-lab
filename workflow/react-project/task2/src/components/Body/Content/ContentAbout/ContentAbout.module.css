@@ -1,0 +1,145 @@
+.contentWrapper {
+    margin-right: 10px;
+    padding: 20px;
+    max-width: 540px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    height: 100px;
+}
+
+
+/* .bluredText {
+    font-family: Asap;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 32px;
+    line-height: 37px;
+    bluredText-align: center;
+    bluredText-transform: capitalize;
+    color: #1B5E20;
+} */
+
+.bluredText {
+    font-family: Asap;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 32px;
+    line-height: 37px;
+    text-align: center;
+    text-transform: capitalize;
+    color: #1B5E20;
+    filter: blur(5px);
+}
+
+
+
+
+.contentWrapper>div {
+    animation: scroll 6s ease-in-out infinite both;
+    z-index: 3;
+}
+
+.contentWrapper div:nth-child(2) {
+    animation-delay: 2s;
+    visibility: hidden;
+}
+
+.contentWrapper div:nth-child(3) {
+    animation-delay: 4s;
+    visibility: hidden;
+}
+
+@keyframes scroll {
+    0% {}
+
+    10% {
+        margin-top: -50px;
+        filter: blur(0px);
+        visibility: visible;
+    }
+
+    20% {
+        opacity: 0;
+        filter: blur(2px);
+        margin-top: -55px;
+    }
+
+    30% {
+        opacity: 0;
+        filter: blur(3px);
+        margin-top: -60px;
+    }
+
+    40% {
+        opacity: 0;
+        filter: blur(4px);
+        margin-top: -65px;
+    }
+
+    50% {
+        opacity: 0;
+        filter: blur(5px);
+        margin-top: -70px;
+    }
+    60% {
+        opacity: 0;
+        margin-top: -75px;
+    }
+
+    70% {
+        opacity: 0;
+        margin-top: -80px;
+    }
+
+    80% {
+        opacity: 0;
+        margin-top: -85px;
+    }
+
+    90% {
+        opacity: 0;
+        margin-top: -90px;
+    }
+
+    100% {
+        margin-top: 0;
+        opacity: 0;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .bluredText {
+      margin-top: 20px;
+      font-size: 1.7rem;
+    }
+  }
+  
+  @media screen and (max-width: 992px) {
+    .bluredText {
+      margin-top: 15px;
+      font-size: 1.5rem;
+    }
+    .contentWrapper {
+      margin-right: 40px;
+      max-width: 340px;
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+    .bluredText {
+      font-size: 0.9rem;
+      line-height: 1.6125rem;
+    }
+    .contentWrapper {
+      height: 100px;
+    }
+  }
+  
+  @media screen and (max-width: 500px) {
+    .contentWrapper {
+      margin-right: 0;
+      max-width: 350px;
+    }
+  }

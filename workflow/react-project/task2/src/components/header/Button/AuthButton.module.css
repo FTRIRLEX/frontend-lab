@@ -1,0 +1,42 @@
+.MyButton{
+    font-family: 'Asap', Arial, sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    background-color: #4CAF50;
+    color: #fff;
+    border: 1px solid #CDD6CF;
+    box-sizing: border-box;
+    border-radius: 10px;
+    height: 50px;
+    margin-right: 20px;
+    /* padding: 5px 10px 5px 10px; */
+    width: 150px;
+}
+
+.MyButton:hover {
+    cursor: pointer;
+    color: grey;
+    border-color: green;
+    transition-duration: 0.5s;
+}
+
+
+
+@media screen and (max-width: 768px) {
+    .MyButton{
+        font-size: 0.7rem;
+        width: 100px;
+        height: 30px;
+    }
+  }
+
+
+  @media screen and (max-width: 400px) {
+    .MyButton{
+        font-size: 0.5rem;
+        width: auto;
+        margin-right: 0px;
+        margin-bottom: 20px;
+    }
+  }
+
