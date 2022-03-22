@@ -1,26 +1,21 @@
-import {
-  FETCH_BEGIN, FETCH_SUCCES, FETCH_FAILED, openModalAction,
-} from './actions/ActionsType';
+import { createAction } from '@reduxjs/toolkit';
+import { openModalAction } from './reducers/Reducer';
 
-const fetchRandomCocktailSuccess = (data) => ({
-  type: FETCH_SUCCES,
+export const fetchRandomCocktailSuccess = createAction('FETCH_SUCCES', (data) => ({
   payload: {
     ...data,
   },
-});
+}));
 
-const fetchRandomCocktailStarted = () => ({
-  type: FETCH_BEGIN,
-});
+export const fetchRandomCocktailStarted = createAction('FETCH_BEGIN');
 
-const fetchRandomCocktailFailure = (error) => ({
-  type: FETCH_FAILED,
+export const fetchRandomCocktailFailure = createAction('FETCH_FAILDE', (error) => ({
   payload: {
     error,
   },
-});
+}));
 
-const fetchRandomCocktail = () => (dispatch) => {
+export const fetchRandomCocktail = () => (dispatch) => {
   dispatch(openModalAction());
   dispatch(fetchRandomCocktailStarted());
   fetch('http://stdlab-api.herokuapp.com/api/cocktails/random/')

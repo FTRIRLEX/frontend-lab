@@ -38,8 +38,10 @@
         }],
         "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
         "no-plusplus":"off",
-        "no-prototype-builtins":"off"
-
-        
+        "no-prototype-builtins":"off",
+        "import/no-unresolved": "off",
+        "react/no-array-index-key": "off",
+        "react-hooks/exhaustive-deps": "off",
+        "no-param-reassign":"off"
     }
 }

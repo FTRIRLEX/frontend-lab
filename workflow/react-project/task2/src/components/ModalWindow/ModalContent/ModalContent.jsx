@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-regular-svg-icons';
 import { useSelector } from 'react-redux';
@@ -20,19 +20,17 @@ const ModalContent = () => {
     }
   };
   const createTr = () => {
-    for (let i = 0; i < ingridients.length; i++) {
-      result.push(
-        <tr key={i}>
-          <td>{i}</td>
-          <td>{ingridients[i]}</td>
-          <td>{measures[i]}</td>
-        </tr>,
-      );
-    }
+    getIngrigients();
+    ingridients.map((el, id) => result.push(
+      <tr key={id}>
+        <td>{id + 1}</td>
+        <td>{el}</td>
+        <td>{measures[id]}</td>
+      </tr>,
+    ));
     return result;
   };
-
-  getIngrigients();
+  const ingridientsTR = useMemo(() => createTr(), [cocktail]);
   if (loading) {
     return <Loader className={classes.loader} />;
   }
@@ -70,7 +68,7 @@ const ModalContent = () => {
               <td>Qnty</td>
               <td />
             </tr>
-            {createTr()}
+            {ingridientsTR}
           </tbody>
         </table>
         <p>{cocktail[0].strInstructions}</p>

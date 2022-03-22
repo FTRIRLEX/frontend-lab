@@ -1,22 +1,23 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { closeModalAction } from '@redux/reducers/Reducer';
+import fetchRandomCocktail from '@redux/FetchCocktail';
 import ContentAbout from './ContentAbout/ContentAbout';
 import ImageButton from './ImageButton/ImageButton';
 import ModalWindow from '../../ModalWindow/ModalWindow';
 import classes from './Content.module.css';
-import { closeModalAction } from '../../../redux/actions/ActionsType';
-import fetchRandomCocktail from '../../../redux/FetchCocktail';
 
 const Content = () => {
   const dispatch = useDispatch();
   const isModalOpen = useSelector((state) => state.modal.isModalOpen);
 
-  const openModal = () => {
+  const openModal = useCallback(() => {
     dispatch(fetchRandomCocktail());
-  };
-  const closeModal = () => {
+  }, [isModalOpen]);
+
+  const closeModal = useCallback(() => {
     dispatch(closeModalAction());
-  };
+  }, [isModalOpen]);
 
   return (
     <>

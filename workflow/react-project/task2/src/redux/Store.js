@@ -1,5 +1,4 @@
-import { applyMiddleware, combineReducers, createStore } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import thunk from 'redux-thunk';
 import modalReducer from './reducers/Reducer';
 import randomCocktail from './reducers/RandomCocktailReducer';
@@ -11,10 +10,8 @@ const RootReducers = combineReducers(
   },
 );
 
-const store = createStore(
-  RootReducers,
-  composeWithDevTools(
-    applyMiddleware(thunk),
-  ),
-);
+const store = configureStore({
+  reducer: RootReducers,
+  middleware: [thunk],
+});
 export default store;

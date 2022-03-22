@@ -1,4 +1,5 @@
-import { FETCH_BEGIN, FETCH_SUCCES, FETCH_FAILED } from '../actions/ActionsType';
+import { createReducer } from '@reduxjs/toolkit';
+import { fetchRandomCocktailStarted, fetchRandomCocktailSuccess, fetchRandomCocktailFailure } from '../FetchCocktail';
 
 const initialState = {
   loading: true,
@@ -6,27 +7,18 @@ const initialState = {
   cocktail: {},
 };
 
-export default function randomCocktail(state = initialState, action) {
-  switch (action.type) {
-    case FETCH_BEGIN:
-      return {
-        ...state,
-        loading: true,
-      };
-    case FETCH_SUCCES:
-      return {
-        ...state,
-        loading: false,
-        error: null,
-        cocktail: action.payload,
-      };
-    case FETCH_FAILED:
-      return {
-        ...state,
-        loading: false,
-        error: action.payload.error,
-      };
-    default:
-      return state;
-  }
-}
+export default createReducer(initialState, (builder) => {
+  builder
+    .addCase(fetchRandomCocktailStarted, (state) => {
+      state.loading = true;
+    })
+    .addCase(fetchRandomCocktailSuccess, (state, action) => {
+      state.loading = false;
+      state.cocktail = action.payload;
+    })
+    .addCase(fetchRandomCocktailFailure, (state, action) => {
+      state.loading = false;
+      state.cocktail = null;
+      state.error = action.payload;
+    });
+});
