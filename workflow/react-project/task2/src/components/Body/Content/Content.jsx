@@ -13,11 +13,11 @@ const Content = () => {
 
   const openModal = useCallback(() => {
     dispatch(fetchRandomCocktail());
-  }, [isModalOpen]);
+  }, []);
 
   const closeModal = useCallback(() => {
     dispatch(closeModalAction());
-  }, [isModalOpen]);
+  }, []);
 
   return (
     <>

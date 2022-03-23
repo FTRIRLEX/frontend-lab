@@ -19,7 +19,7 @@ const ModalContent = () => {
       } else break;
     }
   };
-  const createTr = () => {
+  const addIngredientsToTable = () => {
     getIngrigients();
     ingridients.map((el, id) => result.push(
       <tr key={id}>
@@ -30,7 +30,7 @@ const ModalContent = () => {
     ));
     return result;
   };
-  const ingridientsTR = useMemo(() => createTr(), [cocktail]);
+  const ingridientsTR = useMemo(() => addIngredientsToTable(), [cocktail]);
   if (loading) {
     return <Loader className={classes.loader} />;
   }
