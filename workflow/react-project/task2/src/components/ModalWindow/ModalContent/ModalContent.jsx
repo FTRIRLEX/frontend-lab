@@ -12,11 +12,13 @@ const ModalContent = () => {
   const measures = [];
   const result = [];
   const getIngrigients = () => {
-    for (let i = 1; i < 16; i++) {
-      if (cocktail[0]) {
-        if (cocktail[0][`strIngredient${i}`] != null && cocktail[0][`strIngredient${i}`].length) { ingridients.push(cocktail[0][`strIngredient${i}`]); }
-        if (cocktail[0][`strMeasure${i}`] != null) { measures.push(cocktail[0][`strMeasure${i}`]); }
-      } else break;
+    if (cocktail[0]) {
+      Object.keys(cocktail[0])
+        .filter((el) => el.includes('strIngredient') && cocktail[0][`${el}`] !== null)
+        .forEach((el, id) => {
+          ingridients.push(cocktail[0][`${el}`]);
+          measures.push(cocktail[0][`strMeasure${id + 1}`]);
+        });
     }
   };
   const addIngredientsToTable = () => {
@@ -30,7 +32,7 @@ const ModalContent = () => {
     ));
     return result;
   };
-  const ingridientsTR = useMemo(() => addIngredientsToTable(), [cocktail]);
+  const getIngridientItems = useMemo(() => addIngredientsToTable(), [cocktail]);
   if (loading) {
     return <Loader className={classes.loader} />;
   }
@@ -68,7 +70,7 @@ const ModalContent = () => {
               <td>Qnty</td>
               <td />
             </tr>
-            {ingridientsTR}
+            {getIngridientItems}
           </tbody>
         </table>
         <p>{cocktail[0].strInstructions}</p>
