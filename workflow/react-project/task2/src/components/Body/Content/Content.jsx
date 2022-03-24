@@ -1,26 +1,33 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { closeModalAction } from '@redux/reducers/Reducer';
+import fetchRandomCocktail from '@redux/FetchCocktail';
 import ContentAbout from './ContentAbout/ContentAbout';
 import ImageButton from './ImageButton/ImageButton';
 import ModalWindow from '../../ModalWindow/ModalWindow';
-
 import classes from './Content.module.css';
 
 const Content = () => {
-  const [isModalOpen, setModalOpen] = useState(false);
+  const dispatch = useDispatch();
+  const isModalOpen = useSelector((state) => state.modal.isModalOpen);
 
-  const toggleModal = useCallback(() => {
-    setModalOpen(!isModalOpen);
-  }, [isModalOpen]);
+  const openModal = useCallback(() => {
+    dispatch(fetchRandomCocktail());
+  }, []);
+
+  const closeModal = useCallback(() => {
+    dispatch(closeModalAction());
+  }, []);
 
   return (
     <>
       <div className={classes.contentWrapper}>
         <ContentAbout className={classes.content} />
-        <ImageButton openModal={toggleModal} className={classes.img} />
+        <ImageButton openModal={openModal} className={classes.img} />
       </div>
       <ModalWindow
         isShown={isModalOpen}
-        closeModal={toggleModal}
+        closeModal={closeModal}
         title="Random Cocktail"
       />
     </>
