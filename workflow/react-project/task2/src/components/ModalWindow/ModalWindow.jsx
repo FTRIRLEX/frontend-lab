@@ -1,15 +1,18 @@
 import React from 'react';
-// import { useSelector } from 'react-redux';
-import ModalContent from './ModalContent/ModalContent';
+import { useSelector } from 'react-redux';
+import AuthModal from './AuthModal/AuthModal';
 import ModalHeader from './ModalHeader/ModalHeader';
 import classes from './ModalWindow.module.css';
+import RandomCocktailModal from './RandomCcktailModal/RandomCocktailModal';
 
 const ModalWindow = ({
   closeModal, isShown, title,
-}) => (
-  // const cocktail = useSelector((state) => state.cocktail);
+}) => {
+  const isAuth = useSelector((state) => state.modal.isAuthModal);
 
-  isShown && (
+  return (
+
+    isShown && (
     <div aria-hidden="true" className={classes.modal} onClick={closeModal}>
       <div
         aria-hidden="true"
@@ -17,9 +20,10 @@ const ModalWindow = ({
         onClick={(e) => e.stopPropagation()}
       >
         <ModalHeader title={title} closeModal={closeModal} />
-        <ModalContent />
+        {isAuth ? <AuthModal /> : <RandomCocktailModal />}
       </div>
     </div>
-  )
-);
+    )
+  );
+};
 export default ModalWindow;

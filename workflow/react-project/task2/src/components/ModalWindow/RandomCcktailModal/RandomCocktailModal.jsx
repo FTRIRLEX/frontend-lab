@@ -2,10 +2,10 @@ import React, { useMemo } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-regular-svg-icons';
 import { useSelector } from 'react-redux';
-import classes from './ModalContent.module.css';
+import classes from './RandomCocktailModal.module.css';
 import Loader from '../Loader/Loader';
 
-const ModalContent = () => {
+const RandomCocktailModal = () => {
   const cocktail = useSelector((state) => state.cocktail.cocktail);
   const loading = useSelector((state) => state.cocktail.loading);
   const ingridients = [];
@@ -76,6 +76,8 @@ const ModalContent = () => {
         <p>{cocktail[0].strInstructions}</p>
       </div>
     </div>
+
   );
 };
-export default ModalContent;
+
+export default RandomCocktailModal;
