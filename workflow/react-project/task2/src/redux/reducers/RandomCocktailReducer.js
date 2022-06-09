@@ -2,7 +2,7 @@ import { createReducer } from '@reduxjs/toolkit';
 import { fetchRandomCocktailStarted, fetchRandomCocktailSuccess, fetchRandomCocktailFailure } from '../FetchCocktail';
 
 const initialState = {
-  loading: true,
+  loading: false,
   error: null,
   cocktail: {},
 };

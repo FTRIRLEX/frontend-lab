@@ -1,0 +1,82 @@
+.authWrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    padding: 30px;
+    /* width: 100%; */
+    font-size: 16px;
+    max-height: 700px;
+    align-items: center;
+}
+
+.authTitle{
+    font: 400 32px 'Rochester';
+}
+
+input, 
+label {
+    font-family: 'Quicksand';
+}
+
+label {
+    align-self: flex-start;
+    padding: 5px;
+
+    font-size: 22px;
+}
+
+input {
+    border: 1px solid green;
+    outline: none;
+    width: 80%;
+    border-radius: 5px;
+    font-size: 20px;
+    width: 100%;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}
+
+.notifyBox{
+    width: auto;
+}
+
+button:hover{
+    cursor: pointer;
+}
+
+.switchToggle{
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.toggleAuth {
+    align-self: center;
+}
+
+.toggleAuth > span {
+    color: #4d944f;
+    cursor: pointer;
+}
+
+.succesBtn, .toggleAuth{
+    margin-top: 20px;
+}
+
+button{
+    align-items: flex-end;
+    align-self: flex-end;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 10px;
+    width: 150px;
+    height: 50px;
+    border: 1px solid #CDD6CF;
+    font: 400 16px 'Asap';
+
+}
