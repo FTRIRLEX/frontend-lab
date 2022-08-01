@@ -1,29 +1,22 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback } from 'react';
+import { useDispatch } from 'react-redux';
+import fetchRandomCocktail from '@redux/FetchCocktail';
 import ContentAbout from './ContentAbout/ContentAbout';
 import ImageButton from './ImageButton/ImageButton';
-import ModalWindow from '../../ModalWindow/ModalWindow';
-
 import classes from './Content.module.css';
 
 const Content = () => {
-  const [isModalOpen, setModalOpen] = useState(false);
+  const dispatch = useDispatch();
 
-  const toggleModal = useCallback(() => {
-    setModalOpen(!isModalOpen);
-  }, [isModalOpen]);
+  const openModal = useCallback(() => {
+    dispatch(fetchRandomCocktail());
+  }, []);
 
   return (
-    <>
-      <div className={classes.contentWrapper}>
-        <ContentAbout className={classes.content} />
-        <ImageButton openModal={toggleModal} className={classes.img} />
-      </div>
-      <ModalWindow
-        isShown={isModalOpen}
-        closeModal={toggleModal}
-        title="Random Cocktail"
-      />
-    </>
+    <div className={classes.contentWrapper}>
+      <ContentAbout className={classes.content} />
+      <ImageButton openModal={openModal} className={classes.img} />
+    </div>
   );
 };
 
