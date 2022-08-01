@@ -1,0 +1,39 @@
+.icon{
+    font-size: 2.2rem;
+    color: #FFFFFF;
+    margin-right: 15px;
+  }
+  
+  .textLogo{
+    font-family: 'Rochester';
+    font-style: normal;
+    font-size: 2.5rem;
+    font-weight: 400;
+    line-height: 3.25rem;
+    color: #FFFFFF;
+  
+  }
+
+
+  .logoWrapper{
+    margin-left: 20px;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .textLogo{
+        font-size: 1.8rem;
+    }
+    .icon{
+      font-size: 1.6;
+    }
+  }
+
+
+  @media screen and (max-width: 500px) {
+    .textLogo{
+        font-size: 1.5rem;
+    }
+    .icon{
+      font-size: 1.3rem;
+    }
+  }
